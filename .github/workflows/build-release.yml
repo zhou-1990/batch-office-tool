@@ -1,34 +1,34 @@
-name: Build and Release EXE
+name   名字: Build and Release EXE
 
-on:
-  push:
-    branches: [ main ]
+on:   :
+  push:   推动:
+    branches: [ main ]   分支：[主]
   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: windows-latest
+jobs:   工作:
+  build:   构建:
+    runs-on: windows-latest   上运行:windows-latest
     
-    steps:
-    - uses: actions/checkout@v3
+    steps:   步骤:
+    - uses: actions/checkout@v4
     
-    - name: Setup .NET 6.0
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
+    - name: Setup .NET 6.0   —name：设置项。NET 6.0
+      uses: actions/setup-dotnet@v4
+      with:   :
+        dotnet-version: '6.0.x'   . x的   . x”   . x的   dotnet-version: ' . x '   ”。x '   ”。x '
     
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore dependencies—name：恢复依赖项
+      run: dotnet restore   执行命令dotnet restore
     
-    - name: Build Release
-      run: dotnet build -c Release --no-restore
+    - name: Build Release   —name: Build Release
+      run: dotnet build -c Release --no-restore运行：dotnet build -c Release——no-restore
     
-    - name: Publish EXE
-      run: dotnet publish -c Release -o ./publish -p:PublishSingleFile=true -p:SelfContained=true -p:IncludeNativeLibrariesForSelfExtract=true --runtime win-x64
+    - name: Publish EXE   —name：发布EXE
+      run: dotnet publish -c Release -o ./publish -p:PublishSingleFile=true -p:SelfContained=true -p:IncludeNativeLibrariesForSelfExtract=true --runtime win-x64执行命令dotnet publish -c Release - 0。/publish -p:PublishSingleFile=true -p:SelfContained=true -p: inclenativelibrariesforselfextract =true——runtime win-x64
     
-    - name: Upload to Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: BatchOfficeTool-EXE
-        path: ./publish/BatchOfficeTool.exe
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:   :
+        name: BatchOfficeTool-EXE   名称:BatchOfficeTool-EXE
+        path: ./publish/BatchOfficeTool.exe路径:/发布/ BatchOfficeTool.exe
         retention-days: 90
